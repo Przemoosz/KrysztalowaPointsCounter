@@ -7,6 +7,7 @@ namespace KrysztalowaKreda
     {
         public static void Main(string[] args)
         {
+            
             Stopwatch timer = new Stopwatch();
             Console.WriteLine("Hello There");
             KrysztalowaKredaSolution solution = KrysztalowaKredaSolution.GetInstance();
