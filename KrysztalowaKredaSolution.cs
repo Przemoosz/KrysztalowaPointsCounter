@@ -6,7 +6,10 @@ public sealed class KrysztalowaKredaSolution
     private static KrysztalowaKredaSolution? _solution;
 
     private Dictionary<string, decimal> _itResults = new Dictionary<string, decimal>();
-    
+    private Dictionary<string, decimal> _inzResults = new Dictionary<string, decimal>();
+    private Dictionary<string, decimal> _elektroResults = new Dictionary<string, decimal>();
+    private Dictionary<string, decimal> _mtmResults = new Dictionary<string, decimal>();
+    private Dictionary<string, decimal> _airResults = new Dictionary<string, decimal>();
     
     // Change Coefficient here
     private const decimal _IYearCoefficient = 1;
@@ -18,6 +21,15 @@ public sealed class KrysztalowaKredaSolution
     private KrysztalowaKredaSolution()
     {
         
+    }
+
+    public void ResetDicts()
+    {
+        _itResults = new Dictionary<string, decimal>();
+        _inzResults = new Dictionary<string, decimal>();
+        _mtmResults = new Dictionary<string, decimal>();
+        _elektroResults = new Dictionary<string, decimal>();
+        _airResults = new Dictionary<string, decimal>();
     }
 
     public static KrysztalowaKredaSolution GetInstance()
@@ -38,8 +50,41 @@ public sealed class KrysztalowaKredaSolution
         IEnumerable<string[]> it = new List<string[]>();
         DataAccess.ReadCsv(out it, out elektro, out inz, out air, out mtm);
         PointsCalculate(it, ref _itResults);
-        ShowResult(ref _itResults);
+        PointsCalculate(inz, ref _inzResults);
+        PointsCalculate(elektro, ref _elektroResults);
+        PointsCalculate(air, ref _airResults);
+        PointsCalculate(mtm, ref _mtmResults);
+        // ShowResult(ref _itResults);
     }
+
+    public void CalculateWithMultiThreading()
+    {
+        IEnumerable<string[]> inz = new List<string[]>();
+        IEnumerable<string[]> air = new List<string[]>();
+        IEnumerable<string[]> elektro = new List<string[]>();
+        IEnumerable<string[]> mtm = new List<string[]>();
+        IEnumerable<string[]> it = new List<string[]>();
+        DataAccess.ReadCsv(out it, out elektro, out inz, out air, out mtm);
+        Thread[] threads = new Thread[5]
+        {
+            new Thread(() => PointsCalculate(it, ref _itResults)),
+            new Thread(() => PointsCalculate(inz, ref _inzResults)),
+            new Thread(() => PointsCalculate(air, ref _airResults)),
+            new Thread(() => PointsCalculate(mtm, ref _mtmResults)),
+            new Thread(() => PointsCalculate(elektro, ref _elektroResults)),
+        };
+        foreach (Thread th in threads)
+        {
+            th.Start();
+        }
+
+        foreach (Thread th in threads)
+        {
+            th.Join();
+        }
+        // ShowResult(ref _itResults);
+    }
+    
 
     public void ShowResult(ref Dictionary<string, decimal> dict)
     {
