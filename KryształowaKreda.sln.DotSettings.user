@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a2ab43eb_002D0171_002D4c21_002D912c_002Dc58ec1eb8667/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PointCalculateTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::06F88EC1-88D4-4775-9D2D-7296CE735DC8::net6.0::KredaTests.PointCalculateTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e2e12945_002D3b91_002D4822_002Db871_002D7e89c24e1c52/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="PointCalculateTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::06F88EC1-88D4-4775-9D2D-7296CE735DC8::net6.0::KredaTests.PointCalculateTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ec3d524f_002D23e7_002D49cf_002D8c29_002D10de05e653ad/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Testing_Single_Data" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::06F88EC1-88D4-4775-9D2D-7296CE735DC8::net6.0::KredaTests.PointCalculateTest.Testing_Single_Data&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

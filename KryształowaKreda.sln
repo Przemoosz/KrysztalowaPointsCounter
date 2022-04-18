@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrysztalowaKreda", "KrysztalowaKreda.csproj", "{5D1BBBAB-B2DD-42D8-928D-069CFB669C71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KredaTests", "KredaTests\KredaTests.csproj", "{06F88EC1-88D4-4775-9D2D-7296CE735DC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D1BBBAB-B2DD-42D8-928D-069CFB669C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1BBBAB-B2DD-42D8-928D-069CFB669C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1BBBAB-B2DD-42D8-928D-069CFB669C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1BBBAB-B2DD-42D8-928D-069CFB669C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F88EC1-88D4-4775-9D2D-7296CE735DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F88EC1-88D4-4775-9D2D-7296CE735DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F88EC1-88D4-4775-9D2D-7296CE735DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F88EC1-88D4-4775-9D2D-7296CE735DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
