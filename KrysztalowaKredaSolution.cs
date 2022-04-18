@@ -15,15 +15,17 @@ public sealed class KrysztalowaKredaSolution
     private const decimal _IYearCoefficient = 1;
     private const decimal _IIYearCoefficient = 2;
     private const decimal _IIIYearCoefficient = 3;
-    private const decimal _IVYearCoefficient = 4.5m;
-    private const decimal _VYearCoefficient = 5.5m;
+    private const decimal _IVYearCoefficient = 4m;
+    private const decimal _VYearCoefficient = 5m;
+    
+    // Not used in program
     private const decimal _GraduateCoefficient = 2.5m;
     private KrysztalowaKredaSolution()
     {
         
     }
 
-    public void ResetDicts()
+    public void ResetDict()
     {
         _itResults = new Dictionary<string, decimal>();
         _inzResults = new Dictionary<string, decimal>();
@@ -59,6 +61,8 @@ public sealed class KrysztalowaKredaSolution
 
     public void CalculateWithMultiThreading()
     {
+        // Multithreading Calculate method version 
+        
         IEnumerable<string[]> inz = new List<string[]>();
         IEnumerable<string[]> air = new List<string[]>();
         IEnumerable<string[]> elektro = new List<string[]>();
@@ -82,6 +86,7 @@ public sealed class KrysztalowaKredaSolution
         {
             th.Join();
         }
+        
         // ShowResult(ref _itResults);
     }
     
@@ -133,5 +138,174 @@ public sealed class KrysztalowaKredaSolution
 
         }
     }
-    
+
+    private void OrderDict()
+    {
+        _airResults = _airResults.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+        _elektroResults = _elektroResults.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+        _mtmResults = _mtmResults.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+        _inzResults = _inzResults.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+        _itResults = _itResults.OrderByDescending(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+
+    }
+    public void ExportDataResult()
+    {
+        OrderDict();
+        string path = Directory.GetCurrentDirectory() + "\\Results.txt";
+        Dictionary<string, decimal> firstPlace = new Dictionary<string, decimal>(5);
+        Dictionary<string, decimal> secondPlace = new Dictionary<string, decimal>(5);
+        Dictionary<string, decimal> thirdPlace = new Dictionary<string, decimal>(5);
+
+        
+        using (var fileStream = File.Create(path))
+        {
+            using (StreamWriter streamWriter = new StreamWriter(fileStream))
+            {
+                bool first = true , second = false, third = false;
+                // var orderedDict = _airResults.OrderBy(a => a.Value).ToDictionary(x => x.Key, x => x.Value);
+                streamWriter.WriteLine("===AIR===");
+                foreach (KeyValuePair<string,decimal> kvp in _airResults)
+                {
+
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                    if (first)
+                    {
+                        firstPlace.Add("AIR - " + kvp.Key,kvp.Value);
+                        first = false;
+                        second = true;
+                    }
+                    else if (second)
+                    {
+                        secondPlace.Add("AIR - " + kvp.Key,kvp.Value);
+                        second = false;
+                        third = true;
+                    }
+                    else if (third)
+                    {
+                        thirdPlace.Add("AIR - " + kvp.Key,kvp.Value);
+                        third = false;
+                    }
+                }
+
+                first = true;
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("===MTM===");
+                foreach (KeyValuePair<string,decimal> kvp in _mtmResults)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                    if (first)
+                    {
+                        firstPlace.Add("MTM - " + kvp.Key,kvp.Value);
+                        first = false;
+                        second = true;
+                    }
+                    else if (second)
+                    {
+                        secondPlace.Add("MTM - " + kvp.Key,kvp.Value);
+                        second = false;
+                        third = true;
+                    }
+                    else if (third)
+                    {
+                        thirdPlace.Add("MTM - " + kvp.Key,kvp.Value);
+                        third = false;
+                    }
+                }
+
+                first = true;
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("===ELEKTRO===");
+                foreach (KeyValuePair<string,decimal> kvp in _elektroResults)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                    if (first)
+                    {
+                        firstPlace.Add("ET - " + kvp.Key,kvp.Value);
+                        first = false;
+                        second = true;
+                    }
+                    else if (second)
+                    {
+                        secondPlace.Add("ET - " + kvp.Key,kvp.Value);
+                        second = false;
+                        third = true;
+                    }
+                    else if (third)
+                    {
+                        thirdPlace.Add("ET - " + kvp.Key,kvp.Value);
+                        third = false;
+                    }
+                }
+
+                first = true;
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("===INZYNIERA BIOMEDYCZNA===");
+                foreach (KeyValuePair<string,decimal> kvp in _inzResults)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                    if (first)
+                    {
+                        firstPlace.Add("IB - " + kvp.Key,kvp.Value);
+                        first = false;
+                        second = true;
+                    }
+                    else if (second)
+                    {
+                        secondPlace.Add("IB - " + kvp.Key,kvp.Value);
+                        second = false;
+                        third = true;
+                    }
+                    else if (third)
+                    {
+                        thirdPlace.Add("IB - " + kvp.Key,kvp.Value);
+                        third = false;
+                    }
+                }
+
+                first = true;
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("===IT===");
+                foreach (KeyValuePair<string,decimal> kvp in _itResults)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                    if (first)
+                    {
+                        firstPlace.Add("IT - " + kvp.Key,kvp.Value);
+                        first = false;
+                        second = true;
+                    }
+                    else if (second)
+                    {
+                        secondPlace.Add("IT - " + kvp.Key,kvp.Value);
+                        second = false;
+                        third = true;
+                    }
+                    else if (third)
+                    {
+                        thirdPlace.Add("IT - " + kvp.Key,kvp.Value);
+                        third = false;
+                    }
+                }
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("=== I MIEJSCE ===");
+                foreach (KeyValuePair<string, decimal> kvp in firstPlace)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                }
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("=== II MIEJSCE ===");
+                foreach (KeyValuePair<string, decimal> kvp in secondPlace)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                }
+                streamWriter.WriteLine();
+                streamWriter.WriteLine("=== III MIEJSCE ===");
+                foreach (KeyValuePair<string, decimal> kvp in thirdPlace)
+                {
+                    streamWriter.WriteLine($"{kvp.Key} -- {kvp.Value}");
+                }
+
+            }
+        }
+    }
 }
